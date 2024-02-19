@@ -1,4 +1,10 @@
 import React from 'react';
+import {
+  FeedbackStyledWrapper,
+  ItemsStyledWrapper,
+  NumberStyledWrapper,
+  PositiveStyledWrapper,
+} from './Statistics.styled';
 
 export default function Statistics({
   good,
@@ -8,27 +14,29 @@ export default function Statistics({
   positivePercentage,
 }) {
   return (
-    <ul>
-      <li>
+    <FeedbackStyledWrapper>
+      <ItemsStyledWrapper>
         <span>Good:</span>
-        <span>{good}</span>
-      </li>
-      <li>
+        <NumberStyledWrapper>{good}</NumberStyledWrapper>
+      </ItemsStyledWrapper>
+      <ItemsStyledWrapper>
         <span>Neutral:</span>
-        <span>{neutral}</span>
-      </li>
-      <li>
+        <NumberStyledWrapper>{neutral}</NumberStyledWrapper>
+      </ItemsStyledWrapper>
+      <ItemsStyledWrapper>
         <span>Bad:</span>
-        <span>{bad}</span>
-      </li>
-      <li>
+        <NumberStyledWrapper>{bad}</NumberStyledWrapper>
+      </ItemsStyledWrapper>
+      <ItemsStyledWrapper>
         <span>Total:</span>
-        <span>{total}</span>
-      </li>
-      <li>
+        <PositiveStyledWrapper>{total}</PositiveStyledWrapper>
+      </ItemsStyledWrapper>
+      <ItemsStyledWrapper>
         <span>Positive feedback:</span>
-        <span>{positivePercentage || '0'}%</span>
-      </li>
-    </ul>
+        <PositiveStyledWrapper>
+          {positivePercentage || '0'}%
+        </PositiveStyledWrapper>
+      </ItemsStyledWrapper>
+    </FeedbackStyledWrapper>
   );
 }

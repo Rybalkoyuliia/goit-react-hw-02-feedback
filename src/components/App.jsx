@@ -3,6 +3,8 @@ import Statistics from './Statistics/Statistics';
 import Section from './Section/Section';
 import Feedback from './Feedback/Feedback';
 import Notification from './Notification/Notification';
+import { ButtonStyledWrapper, StyledContainer } from './App.styled';
+import smiles from './Feedback/smiles.json';
 
 export class App extends React.Component {
   state = {
@@ -32,30 +34,34 @@ export class App extends React.Component {
   };
   countPositiveFeedbackPercentage = () => {
     let percentage = Math.round(
-      (100 * this.state.good) / +this.countTotalFeedback()
+      (100 * this.state.good) / this.countTotalFeedback()
     );
     return percentage;
   };
 
   onLeaveFeedback = state => {
-    this.setState(prev => ({ [state]: prev[state] + 1 }));
+    this.setState(prevState => ({ [state]: prevState[state] + 1 }));
   };
 
   render() {
     const total = this.countTotalFeedback();
     const positivePercent = this.countPositiveFeedbackPercentage();
+
     return (
-      <>
+      <StyledContainer>
         <Section title="Please leave feedback">
-          <Feedback
-            options={Object.keys(this.state)}
-            onLeaveFeedback={this.onLeaveFeedback}
-          />
+          <ButtonStyledWrapper>
+            <Feedback
+              options={Object.keys(this.state)}
+              onLeaveFeedback={this.onLeaveFeedback}
+              smiles={smiles}
+            />
+          </ButtonStyledWrapper>
         </Section>
 
         <Section title="Statistics">
           {this.countTotalFeedback() === 0 ? (
-            <Notification message="There is no feedback" />
+            <Notification message="There is no feedback ☕️" />
           ) : (
             <Statistics
               good={this.state.good}
@@ -66,7 +72,7 @@ export class App extends React.Component {
             ></Statistics>
           )}
         </Section>
-      </>
+      </StyledContainer>
     );
   }
 }

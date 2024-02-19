@@ -1,17 +1,18 @@
 import React from 'react';
 import { v4 as uuid } from 'uuid';
+import { StyledButton } from './Feedback.styled';
 
-export default function FeedbackOption({ options, onLeaveFeedback }) {
-  return options.map(option => (
+export default function Feedback({ options, onLeaveFeedback, smiles }) {
+  return options.map((option, idx) => (
     <div key={uuid()}>
-      <button
+      <StyledButton
         type="button"
         onClick={() => {
           onLeaveFeedback(option);
         }}
       >
-        {option}
-      </button>
+        {smiles[idx].smile}
+      </StyledButton>
     </div>
   ));
 }
